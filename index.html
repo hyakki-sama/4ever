@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Amor - Guilherme & Larissa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #3C1B43, #fad0c4);
+            color: #fff;
+            text-align: center;
+        }
+
+        h1, h3, h4{
+            color: black;            
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .countdown {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .carousel-container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 5px;
+            border: 3px solid white;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nosso Amor ❤️</h1>
+        <h3>Guilherme & Larissa</h3>
+        <div class="card p-4 mt-4">
+            <h4>Para sempre, desde 01/06/2024</h4>
+            <div id="contador" class="countdown"></div>
+        </div>
+        <div class="photos mt-4">
+            <h4>Nossas Memórias 📸</h4>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#10094;</button>
+                <div class="carousel" id="carousel">
+                    <!-- 20 imagens serão adicionadas aqui -->
+                </div>
+                <button class="carousel-btn next" onclick="moveCarousel(1)">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function atualizarContador() {
+        const inicio = new Date("2024-06-01T20:00:00");
+        const agora = new Date();
+        const diff = agora - inicio;
+        
+        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const horas = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        const minutos = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        const segundos = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+        
+        document.getElementById("contador").innerHTML = `${dias} dias, ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+
+        const carousel = document.getElementById("carousel");
+        let index = 0;
+
+        function moveCarousel(direction) {
+            const items = document.querySelectorAll(".carousel img");
+            const totalItems = items.length;
+            const visibleItems = Math.floor(document.querySelector(".carousel-container").offsetWidth / 160);
+            index += direction;
+            if (index < 0) index = 0;
+            if (index > totalItems - visibleItems) index = totalItems - visibleItems;
+            carousel.style.transform = `translateX(-${index * 160}px)`;
+        }
+
+        function addImagesToCarousel(imageUrls) {
+            imageUrls.forEach(url => {
+                const img = document.createElement("img");
+                img.src = url;
+                carousel.appendChild(img);
+            });
+        }
+
+        const imageUrls = [
+            "img/image1.jpeg", "img/image2.jpeg", "img/image3.jpeg", "img/image4.jpeg", "img/image5.jpeg",
+            "img/image6.jpeg", "img/image7.jpeg", "img/image8.jpeg", "img/image9.jpeg", "img/image10.jpeg",
+            "img/image11.jpeg", "img/image12.jpeg", "img/image13.jpeg", "img/image14.jpeg", "img/image15.jpeg",
+            "img/image16.jpeg", "img/image17.jpeg", "img/image18.jpeg", "img/image19.jpeg", "img/image20.jpeg"
+        ];
+
+        addImagesToCarousel(imageUrls);
+    </script>
+</body>
+</html>
