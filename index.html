@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,33 +15,50 @@
             color: #fff;
             text-align: center;
             font-family: 'Poppins', sans-serif;
+            /* Adicionado para garantir a ocupação da tela */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        h1, h3, h4{
-            color: black;            
+        h1,
+        h3,
+        h4 {
+            color: black;
         }
+
         .container {
             margin-top: 50px;
+            /* Adicionado para centralizar o conteúdo verticalmente */
+            flex: 1; /* Ocupa o espaço disponível */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centraliza verticalmente */
         }
+
         .card {
             background: rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             padding: 20px;
             backdrop-filter: blur(10px);
         }
+
         .countdown {
             font-size: 2rem;
             font-weight: bold;
         }
+
         .carousel-container {
             width: 90%;
             margin: auto;
             overflow: hidden;
         }
+
         .carousel {
             display: flex;
             transition: transform 0.5s ease-in-out;
         }
+
         .carousel img {
             width: 150px;
             height: 150px;
@@ -49,6 +67,7 @@
             margin: 5px;
             border: 3px solid white;
         }
+
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -58,15 +77,35 @@
             cursor: pointer;
             padding: 10px;
             border-radius: 50%;
+            z-index: 1; /* Garante que os botões fiquem em cima das imagens */
         }
+
         .prev {
             left: 10px;
         }
+
         .next {
             right: 10px;
         }
+
+        /* Media query para telas menores (ex: celulares) */
+        @media (max-width: 768px) {
+            .carousel img {
+                width: 100px; /* Imagens menores em telas pequenas */
+                height: 100px;
+            }
+
+            .countdown {
+                font-size: 1.5rem; /* Contagem regressiva menor */
+            }
+
+            .container {
+                margin-top: 20px; /* Margem superior menor */
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Nosso Amor ❤️</h1>
@@ -80,8 +119,7 @@
             <div class="carousel-container">
                 <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#10094;</button>
                 <div class="carousel" id="carousel">
-                    <!-- 20 imagens serão adicionadas aqui -->
-                </div>
+                    </div>
                 <button class="carousel-btn next" onclick="moveCarousel(1)">&#10095;</button>
             </div>
         </div>
