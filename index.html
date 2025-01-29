@@ -126,18 +126,21 @@
     </div>
 
     <script>
-        function atualizarContador() {
-        const inicio = new Date("2024-06-01T20:00:00");
-        const agora = new Date();
-        const diff = agora - inicio;
-        
-        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const horas = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-        const minutos = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-        const segundos = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
-        
-        document.getElementById("contador").innerHTML = `${dias} dias, ${horas}h ${minutos}m ${segundos}s`;
-    }
+       function atualizarContador() {
+            const inicio = new Date("2024-06-01T20:00:00");
+            const agora = new Date();
+            const diff = agora - inicio;
+
+            const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const horas = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            const minutos = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            const segundos = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+
+            // Cálculo de meses
+            const meses = Math.floor(diff / (1000 * 60 * 60 * 24 * 30)); // Aproximadamente 30 dias por mês
+
+            document.getElementById("contador").innerHTML = `${dias} dias, ${horas}h ${minutos}m ${segundos}s (${meses} meses)`;
+        }
 
         setInterval(atualizarContador, 1000);
         atualizarContador();
